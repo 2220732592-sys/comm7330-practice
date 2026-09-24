@@ -1,0 +1,48 @@
+name: Publish COM7330 to GitHub Pages
+on:
+ push:
+  branches: [main]
+ workflow_dispatch:
+permissions:
+ contents: read
+concurrency:
+ group: github-pages
+ cancel-in-progress: false
+jobs:
+ build:
+  runs-on: ubuntu-latest
+  steps:
+   - uses: actions/checkout@v6
+   - name: Extract the website source uploaded through GitHub
+     run: |
+      if [ -f com7330-source.zip ]; then
+       python3 -m zipfile -e com7330-source.zip .
+      fi
+   - uses: actions/setup-node@v6
+     with:
+      node-version: '24'
+   - uses: pnpm/action-setup@v4
+     with:
+      version: 11.25.0
+   - uses: actions/configure-pages@v5
+     id: pages
+   - run: pnpm install --frozen-lockfile
+   - run: pnpm build
+     env:
+      PAGES_BASE_PATH: ${{ steps.pages.outputs.base_path }}/
+      VITE_API_ORIGIN: https://python-sandbox-api-production.up.railway.app
+   - uses: actions/upload-pages-artifact@v4
+     with:
+      path: dist
+ deploy:
+  needs: build
+  runs-on: ubuntu-latest
+  permissions:
+   pages: write
+   id-token: write
+  environment:
+   name: github-pages
+   url: ${{ steps.deployment.outputs.page_url }}
+  steps:
+   - uses: actions/deploy-pages@v4
+     id: deployment
