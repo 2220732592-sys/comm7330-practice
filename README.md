@@ -44,7 +44,9 @@ The existing official image `python:3.13-slim` starts via `services/python-execu
 
 The bootstrap pins Python WASI by SHA-256, installs pinned Wasmtime/aiohttp versions, drops root privileges, and gives the HTTP service access only to its own data directory. Cold starts need access to the pinned package downloads. The guest sandbox never receives the backend credentials or storage mount.
 
-Visitor records are limited to 1.8 MB per workspace request. Original files are limited to 20 MB each, 80 MB per visitor, and 256 MB overall; records use at most 128 MB overall. Capacity and rate-limit failures are visible to the user, and unsaved drafts remain local. The 512 MB volume is intended for personal/small-group use; existing Railway usage and quota limits still apply.
+Visitor records are limited to 1.8 MB per workspace request. Original files are limited to 20 MB each, 80 MB per visitor, and 256 MB overall; records use at most 128 MB overall. Capacity and rate-limit failures are visible to the user, and unsaved drafts remain local. The 500 MB volume is intended for personal/small-group use; existing Railway usage and quota limits still apply.
+
+Railway is currently on a trial plan. Public Python execution and cloud saves require available Railway credit and an active plan; GitHub Pages only hosts the frontend. The trial must be renewed or upgraded by the account owner before its time or credit runs out. No paid upgrade has been made.
 
 ## Verification
 
