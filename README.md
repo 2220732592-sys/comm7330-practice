@@ -4,7 +4,9 @@ Personal programming practice and mock exams for BNBU COM7330. English course-st
 
 ## Deployment status
 
-This repository contains the GitHub Pages frontend and its Railway Python backend. GitHub Pages is configured for GitHub Actions with HTTPS enforced. Deployment and public integration checks are in progress. The frontend builds successfully, and the backend passes the local execution, grading, isolation and persistence checks described below.
+Public website: **https://2220732592-sys.github.io/comm7330-practice/**
+
+Deployed on 24 September 2026. GitHub Actions successfully builds and publishes the HTTPS frontend; Railway runs the isolated Python API. No login is required. Public verification passed all 60 reference tests, concurrent execution, visitor record separation, save/reload and preservation of saved answers/results through a production backend redeployment. Browser checks verified editing, Run Code, hidden-test submission and proportional grading: a deliberate partially correct answer produced 0.83/5, with a final exam score of 95.83/100. The submitted error appeared in the Mistake Book.
 
 The complete source is in `com7330-source.zip`, uploaded through GitHub's web interface. The Pages workflow extracts this archive before building. Extract it locally to edit the application; upload an updated source archive to redeploy. The archive includes no runtime credentials, user records or installed dependencies.
 
